@@ -18,6 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/twigjs/twig.min.js',  express.static(__dirname + '/node_modules/twig/twig.min.js'));
+app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
