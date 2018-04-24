@@ -18,15 +18,15 @@
                 <tr>
                     <th colspan="3">Clásicas</th>
                 </tr>
-			    {% for pizza in pizzas.clasicas %}
+                {% for pizza in pizzas.clasicas %}
                     {% include "shared/renderPizza.twig" %}
-			    {% endfor %}
+                {% endfor %}
                 <tr>
                     <th colspan="3">Especiales</th>
                 </tr>
-			    {% for pizza in pizzas.especiales %}
+                {% for pizza in pizzas.especiales %}
                     {% include "shared/renderPizza.twig" %}
-			    {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
