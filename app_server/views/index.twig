@@ -18,14 +18,18 @@
                 <tr>
                     <th colspan="3">Clásicas</th>
                 </tr>
-                {% for pizza in pizzas.clasicas %}
-                    {% include "shared/renderPizza.twig" %}
+                {% for pizza in pizzas %}
+                    {% if pizza.tipo == 'clásicas' %}
+                        {% include "shared/renderPizza.twig" %}
+                    {% endif %}
                 {% endfor %}
                 <tr>
                     <th colspan="3">Especiales</th>
                 </tr>
-                {% for pizza in pizzas.especiales %}
-                    {% include "shared/renderPizza.twig" %}
+                {% for pizza in pizzas %}
+                    {% if pizza.tipo == 'especiales' %}
+                        {% include "shared/renderPizza.twig" %}
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
