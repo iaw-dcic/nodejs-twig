@@ -4,7 +4,7 @@ let pizzas;
 $(init);
 
 function init() {
-    $.get("./data/pizzas.json", function(data, status) {
+    $.get("./api/pizzas", function(data, status) {
         pedido = recuperarPedido();
         pizzas = new Map(data.map((pizza) => [getId(pizza), pizza]));
         mostrarPizzas(ordenarPizzas(data));
@@ -52,7 +52,7 @@ function computarTotal() {
 }
 
 function getId(pizza) {
-    return pizza.nombre.replace(/\s/g, '');
+    return pizza._id;
 }
 
 function enPedido(id) {
