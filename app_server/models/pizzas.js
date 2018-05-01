@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const pizzaSchema = new mongoose.Schema({
-  nommbre: {
+  nombre: {
     type: String,
     required: true
   },

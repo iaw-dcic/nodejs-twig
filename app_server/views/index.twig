@@ -2,9 +2,18 @@
 
 {% block body %}
 <div class="container">
-    <div class="titulo">
-        <h1>{{title}}</h1>
+    <div class="auth-nav">
+        <div class="button">
+        {% if user %}
+            <a href="/logout">{{user.username}}</a>
+        {% else %}
+            <a href="/login">Ingresar</a>
+            <a href="/register">Registrarse</a>
+        {% endif %}
+        </div>
     </div>
+
+{% include "shared/titulo.twig" %}
     <div class="menu">
         <table id="tabla">
             <thead>

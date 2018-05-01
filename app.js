@@ -4,11 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('./app_server/models/db');
+const passport = require('passport');
 
 const indexRouter = require('./app_server/routes/index');
-const usersRouter = require('./app_server/routes/users');
+const authRouter = require('./app_server/routes/auth');
 const apiRouter = require('./app_server/routes/api');
-
 const app = express();
 
 // view engine setup
@@ -19,13 +19,36 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(require('express-session')({
+  secret: 'nodejs-twig-secret',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/twigjs/twig.min.js',  express.static(__dirname + '/node_modules/twig/twig.min.js'));
 app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', authRouter);
 app.use('/api', apiRouter);
+
+
+// passport config
+// requires the model with Passport-Local Mongoose plugged in
+const User = require('./app_server/models/users');
+
+// use static authenticate method of model in LocalStrategy
+passport.use(User.createStrategy());
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
