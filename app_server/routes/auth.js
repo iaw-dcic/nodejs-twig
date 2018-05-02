@@ -1,36 +1,14 @@
 
-var express = require('express');
-var passport = require('passport');
-var User = require('../models/users');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const auth = require('../controllers/auth');
 
-router.get('/register', function(req, res) {
-    res.render('register', { title: 'Sal\'s Pizza v4-twig' });
-});
+router.get('/register', auth.getRegister);
+router.post('/register', auth.register);
 
-router.post('/register', function(req, res) {
-    User.register({ username : req.body.username }, req.body.password, function(err, user) {
-        if (err) {
-            return res.render('register', { title: 'Sal\'s Pizza v4-twig', user : user });
-        }
+router.get('/login', auth.getLogin);
+router.post('/login', auth.login);
 
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
-        });
-    });
-});
-
-router.get('/login', function(req, res) {
-    res.render('login', { title: 'Sal\'s Pizza v4-twig', user : req.user });
-});
-
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-});
-
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
+router.get('/logout', auth.logout);
 
 module.exports = router;
