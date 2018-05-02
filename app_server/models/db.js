@@ -37,4 +37,5 @@ process.on('SIGTERM', () => {                      
 });
 
 require('./pizzas');
+require('./pedidos');
 require('./users');

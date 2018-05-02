@@ -5,10 +5,12 @@ $(init);
 
 function init() {
     $.get("./api/pizzas", function(data, status) {
-        pedido = recuperarPedido();
-        pizzas = new Map(data.map((pizza) => [getId(pizza), pizza]));
-        mostrarPizzas(ordenarPizzas(data));
-        actualizarTotal(computarTotal());
+        recuperarPedido(function(pedidoRecuperado) {
+            pedido = pedidoRecuperado;
+            pizzas = new Map(data.map((pizza) => [getId(pizza), pizza]));
+            mostrarPizzas(ordenarPizzas(data));
+            actualizarTotal(computarTotal());            
+        })
     });
 }
 

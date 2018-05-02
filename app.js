@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 const logger = require('morgan');
 require('./app_server/models/db');
 const passport = require('passport');
@@ -19,6 +20,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json())
 
 app.use(require('express-session')({
   secret: 'nodejs-twig-secret',
