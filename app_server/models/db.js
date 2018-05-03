@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// const dbURI = 'mongodb://localhost/sals';
-const dbURI = process.env.MLAB_URI;
+const dbURI = 'mongodb://localhost/sals';
+// const dbURI = process.env.MLAB_URI;
 
 mongoose.connect(dbURI);
 

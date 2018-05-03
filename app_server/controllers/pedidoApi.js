@@ -5,7 +5,7 @@ const getPedido = function (req, res) {
 	Pedido
 		.findById(req.user._id)
 		.exec((err, pedido) => {
-			if (err) { 
+			if (err || !pedido) { 
 				res
 					.status(404)
 					.json(err);    
